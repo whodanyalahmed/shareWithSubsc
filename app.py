@@ -6,6 +6,9 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
+# https://drive.google.com/drive/folders/1hJVzRZoi6EJPp8Mn9n44GP8ZRxsu16eA
+# https://docs.google.com/spreadsheets/d/1-qyAerPjUHYCxG0r_P0lbxphia3XqXMLzS4cCOmkhSU/edit#gid=1946276957
+
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
