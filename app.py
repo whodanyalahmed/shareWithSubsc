@@ -55,7 +55,7 @@ def CheckFileDir(FileName,dir=1):
 
         results = service.files().list(q='mimeType = "application/vnd.google-apps.spreadsheet" and trashed=false',spaces='drive',fields="nextPageToken, files(id, name)",pageSize=400).execute()
     else:
-        results = service.files().list(q='application/vnd.google-apps.folder and trashed=false',spaces='drive',fields="nextPageToken, files(id, name)",pageSize=400).execute()
+        results = service.files().list(q='mimeType = "application/vnd.google-apps.folder" and trashed=false',spaces='drive',fields="nextPageToken, files(id, name)",pageSize=400).execute()
     items = results.get('files', [])
 
     # print(len(items))
@@ -103,13 +103,17 @@ def ShareFile(filename,emails):
     # add emails like this
     try:
         for email in emails:
+            print("for email : "+email)
             new_permission = {
                 'type': 'user',
-                'role': 'writer',
+                'role': 'reader',
                 'emailAddress': email
                 }
-            run_new_permission = service.permissions().create(fileId=file_id,sendNotificationEmail=False,body=new_permission).execute()
-            print("success : New Email added")
+            try:
+                run_new_permission = service.permissions().create(fileId=file_id,sendNotificationEmail=False,body=new_permission).execute()
+                print("success : New Email added")
+            except Exception as e:
+                print("error: can't add permissions for " + email)
     except Exception as e:
         print("error : cant add new permission")
 
