@@ -1,6 +1,6 @@
 
 from __future__ import print_function
-import os.path
+import os.path,time
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -133,16 +133,16 @@ def GetExcelValues(range,Id):
         return values
 
 if __name__ == '__main__':
-    emails = ["yahoo-finance@yahoo-307609.iam.gserviceaccount.com","yahoo-finance-1@yahoo-307609.iam.gserviceaccount.com","yahoo-finance-2@yahoo-307609.iam.gserviceaccount.com","yahoo-finance-3@yahoo-307609.iam.gserviceaccount.com","yahoo-finance-4@yahoo-307609.iam.gserviceaccount.com","yahoo-finance-5@yahoo-307609.iam.gserviceaccount.com","ticker-a@ticker-316606.iam.gserviceaccount.com"]
-    # ShareFile('test',emails)
-    fileName = "Test"
-    id = CheckFileDir(fileName)
-    values = GetExcelValues('W9:W100000',id)
-    print(values)
-    emails = []
-    for i in values:
-        for email in i:
-            emails.append(email)
+    while True:    
+        fileName = "Test"
+        id = CheckFileDir(fileName)
+        values = GetExcelValues('W9:W100000',id)
+        emails = []
+        for i in values:
+            for email in i:
+                emails.append(email)
 
-    print(emails) 
-    ShareFile('Foldertest',emails)
+        print(emails) 
+        ShareFile('Foldertest',emails)
+        print('info : sleeping for 10min 😊 ')
+        time.sleep(600)
